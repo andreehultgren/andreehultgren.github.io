@@ -1,2 +1,0 @@
-(this.webpackJsonpcvpage=this.webpackJsonpcvpage||[]).push([[0],{7:function(e,t,n){"use strict";n.r(t);var c=n(0),r=n.n(c),a=n(1),l=n.n(a);function o(){return r.a.createElement("div",null,"TechStack")}function u(){return r.a.createElement("div",null,"Portfolio")}l.a.render(r.a.createElement(o,null),document.getElementById("tech")),l.a.render(r.a.createElement(u,null),document.getElementById("portfolio"))}},[[7,1,2]]]);
-//# sourceMappingURL=main.e3bb6467.chunk.js.map
