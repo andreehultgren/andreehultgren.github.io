@@ -1,0 +1,45 @@
+.stack {
+  position: relative;
+  padding: 0px 4vw;
+  height: fit-content;
+  transform: rotate(180deg);
+  margin: auto;
+}
+
+.layer {
+  transform: scale(1, 0.5) rotate(45deg);
+  opacity: 0.9;
+  transition: opacity 500ms;
+}
+
+.stack:hover > .layer {
+  opacity: 0.6;
+}
+
+.stack > .layer:hover {
+  opacity: 1;
+}
+
+.content {
+  flex: 1;
+  padding: 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text-color);
+}
+
+.content h1 {
+  text-align: center;
+  font-size: xx-large;
+}
+
+@media (max-width: 750px) {
+  .content h1 {
+    text-align: center;
+    font-size: x-large;
+  }
+  .split {
+    flex-direction: column;
+  }
+}

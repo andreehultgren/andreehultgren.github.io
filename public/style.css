@@ -72,6 +72,7 @@ body.preload * {
 }
 
 #tech {
+  padding-top: 15vh;
   background-color: var(--secondary-bg-color);
   min-height: 100vh;
 }
@@ -83,4 +84,16 @@ body.preload * {
 footer {
   height: 100px;
   background-color: var(--secondary-bg-color);
+}
+
+.container {
+  max-width: 80%;
+  margin: auto;
+}
+
+.split {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
 }
