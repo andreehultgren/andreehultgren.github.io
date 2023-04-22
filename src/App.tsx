@@ -1,8 +1,18 @@
 import React from "react";
-import { LandingText, LandingTextSmall } from "src/components/Text";
+import { H2, H4, LandingText, LandingTextSmall } from "src/components/Text";
 import { CenteredColumn } from "src/components/Flex";
 import Colored from "src/components/Colored";
 import styled from "styled-components";
+import Center from "src/components/Center";
+import RustSVG from "./rust.svg";
+import { Row } from "src/components/Flex";
+import ReactIcon from "./icons/ReactIcon";
+import FlutterIcon from "./icons/FlutterIcon";
+import PythonIcon from "./icons/PythonIcon";
+import RustIcon from "./icons/RustIcon";
+import PostgresIcon from "./icons/PostgresIcon";
+import MongoDBIcon from "./icons/MongoDBIcon";
+import AWSIcon from "./icons/AWSIcon";
 
 const Page = styled.section`
   height: 100vh;
@@ -28,6 +38,7 @@ function App() {
       >
         <CenteredColumn style={{ height: "100%" }}>
           <LandingText>Andree Hultgren</LandingText>
+
           <LandingText>
             <Colored>{"<"}</Colored>
             Full stack developer
@@ -74,8 +85,8 @@ function App() {
         <CenteredColumn style={{ height: "100%" }}>
           <LandingText>What are my skills?</LandingText>
           <LandingTextSmall>
-            What do I know? What am I capable of? <br />
-            This is what I am the very best at:
+            What do I know? <br />
+            What am I capable of? <br />
           </LandingTextSmall>
         </CenteredColumn>
       </Page>
@@ -92,11 +103,18 @@ function App() {
           });
         }}
       >
-        <CenteredColumn style={{ height: "100%" }}>
+        <CenteredColumn style={{ height: "100%", gap: 40 }}>
           <LandingText>Frontend Development</LandingText>
-          <LandingTextSmall>
-            Experienced React developer <br /> I also know flutter quite well
-          </LandingTextSmall>
+          <Row style={{ gap: 80 }}>
+            <CenteredColumn>
+              <ReactIcon />
+              <LandingTextSmall>React</LandingTextSmall>
+            </CenteredColumn>
+            <CenteredColumn>
+              <FlutterIcon />
+              <LandingTextSmall>Flutter</LandingTextSmall>
+            </CenteredColumn>
+          </Row>
         </CenteredColumn>
       </Page>
       <Page
@@ -114,11 +132,16 @@ function App() {
       >
         <CenteredColumn style={{ height: "100%" }}>
           <LandingText>Backend Development</LandingText>
-          <LandingTextSmall>
-            Expert level Python developer <br /> I can do almost anything in
-            Python. <br /> Websites <br /> AI <br /> Games <br /> Smart Mirrors
-            <br /> <br /> You name it. I have probably done it in Python.
-          </LandingTextSmall>
+          <Row style={{ gap: 80 }}>
+            <CenteredColumn>
+              <PythonIcon />
+              <LandingTextSmall>Python</LandingTextSmall>
+            </CenteredColumn>
+            <CenteredColumn>
+              <RustIcon />
+              <LandingTextSmall>Rust</LandingTextSmall>
+            </CenteredColumn>
+          </Row>
         </CenteredColumn>
       </Page>
       <Page
@@ -136,11 +159,16 @@ function App() {
       >
         <CenteredColumn style={{ height: "100%" }}>
           <LandingText>Databases</LandingText>
-          <LandingTextSmall>
-            I have mainly worked with relational databases.
-            <br /> I can write any query you'd like. <br /> I am building
-            experience in scaling databases.
-          </LandingTextSmall>
+          <Row style={{ gap: 80 }}>
+            <CenteredColumn>
+              <PostgresIcon />
+              <LandingTextSmall>PostgreSQL</LandingTextSmall>
+            </CenteredColumn>
+            <CenteredColumn>
+              <MongoDBIcon />
+              <LandingTextSmall>MongoDB</LandingTextSmall>
+            </CenteredColumn>
+          </Row>
         </CenteredColumn>
       </Page>
       <Page
@@ -151,11 +179,11 @@ function App() {
       >
         <CenteredColumn style={{ height: "100%" }}>
           <LandingText>Cloud System</LandingText>
-          <LandingTextSmall>
-            I have worked exclusively on AWS
-            <br /> So if you're running GCP or Azure, I'll have to google a few
-            things to get running.
-          </LandingTextSmall>
+          <Row style={{ gap: 80 }}>
+            <CenteredColumn>
+              <AWSIcon />
+            </CenteredColumn>
+          </Row>
         </CenteredColumn>
       </Page>
     </>
