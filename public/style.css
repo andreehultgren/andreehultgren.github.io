@@ -1,9 +1,10 @@
 html,
 body {
   margin: 0px;
-  font-family: "Manrope", sans-serif;
+  font-family: sans-serif;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
   scroll-behavior: smooth;
+  background: linear-gradient(180deg, #203040 0%, #203550 100%);
 }

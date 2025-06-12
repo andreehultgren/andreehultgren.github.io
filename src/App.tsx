@@ -1,10 +1,7 @@
 import React from "react";
-import { H2, H4, LandingText, LandingTextSmall } from "src/components/Text";
+import { LandingText, LandingTextSmall } from "src/components/Text";
 import { CenteredColumn } from "src/components/Flex";
 import Colored from "src/components/Colored";
-import styled from "styled-components";
-import Center from "src/components/Center";
-import RustSVG from "./rust.svg";
 import { Row } from "src/components/Flex";
 import ReactIcon from "./icons/ReactIcon";
 import FlutterIcon from "./icons/FlutterIcon";
@@ -13,12 +10,8 @@ import RustIcon from "./icons/RustIcon";
 import PostgresIcon from "./icons/PostgresIcon";
 import MongoDBIcon from "./icons/MongoDBIcon";
 import AWSIcon from "./icons/AWSIcon";
+import { Page } from "./components/Page";
 
-const Page = styled.section`
-  height: 100vh;
-  width: 100vw;
-  scroll-snap-align: start;
-`;
 
 function App() {
   return (

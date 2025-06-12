@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 interface IProps {
@@ -70,14 +69,14 @@ export default function Text({ variant, children, color, size }: IProps) {
 // And create simplified versions of the text component
 
 export function H1(props: Omit<IProps, "variant">) {
-  let outProps = {
+  const outProps = {
     size: "50px",
     ...props,
   };
   return <Text {...outProps} variant="h1" />;
 }
 export function H2(props: Omit<IProps, "variant">) {
-  let outProps = {
+  const outProps = {
     size: "30px",
     ...props,
   };
