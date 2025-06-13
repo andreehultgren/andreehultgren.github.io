@@ -1,26 +1,26 @@
-import { LandingText, LandingTextSmall } from "../components/Text";
-import { CenteredColumn } from "../components/Flex";
-import { Page } from "../components/Page";
+import { LandingText, LandingTextSmall } from "src/components/Text";
+import { CenteredColumn } from "src/components/Flex";
+import { GradientPage } from "src/components";
 
 type Props = {
   startColor: string;
   endColor: string;
+  pageId?: string;
+  nextId?: string;
 };
 
-export default function SkillsPage({ startColor, endColor }: Props) {
+export default function SkillsPage({
+  startColor,
+  endColor,
+  pageId,
+  nextId,
+}: Props) {
   return (
-    <Page
-      id="skills"
-      style={{
-        background: `linear-gradient(180deg, ${startColor} 0%, ${endColor} 100%)`,
-      }}
-      onClick={() => {
-        document.getElementById("frontend")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "start",
-        });
-      }}
+    <GradientPage
+      startColor={startColor}
+      endColor={endColor}
+      pageId={pageId}
+      nextId={nextId}
     >
       <CenteredColumn style={{ height: "100%" }}>
         <LandingText>What are my skills?</LandingText>
@@ -29,6 +29,6 @@ export default function SkillsPage({ startColor, endColor }: Props) {
           What am I capable of? <br />
         </LandingTextSmall>
       </CenteredColumn>
-    </Page>
+    </GradientPage>
   );
 }

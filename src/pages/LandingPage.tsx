@@ -1,27 +1,27 @@
 import { LandingText } from "src/components/Text";
 import { CenteredColumn } from "../components/Flex";
 import Colored from "../components/Colored";
-import { Page } from "../components/Page";
+import { GradientPage } from "src/components";
 
 type Props = {
   startColor: string;
   endColor: string;
+  pageId?: string;
+  nextId?: string;
 };
 
-export default function LandingPage({ startColor, endColor }: Props) {
+export default function LandingPage({
+  startColor,
+  endColor,
+  pageId,
+  nextId,
+}: Props) {
   return (
-    <Page
-      id="home"
-      style={{
-        background: `linear-gradient(180deg, ${startColor} 0%, ${endColor} 100%)`,
-      }}
-      onClick={() => {
-        document.getElementById("profile")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "start",
-        });
-      }}
+    <GradientPage
+      startColor={startColor}
+      endColor={endColor}
+      pageId={pageId}
+      nextId={nextId}
     >
       <CenteredColumn style={{ height: "100%" }}>
         <LandingText>Andree Hultgren</LandingText>
@@ -33,6 +33,6 @@ export default function LandingPage({ startColor, endColor }: Props) {
         </LandingText>
         <p style={{ color: "white" }}>{"(Click or scroll to navigate)"}</p>
       </CenteredColumn>
-    </Page>
+    </GradientPage>
   );
 }

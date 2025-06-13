@@ -7,7 +7,7 @@ import {
   BackendPage,
   DatabasePage,
 } from "src/pages";
-import { interpolateColor } from "./utils/interpolateColor";
+import { interpolateColor } from "src/utils/interpolateColor";
 
 const pages = [
   LandingPage,
@@ -33,6 +33,8 @@ function App() {
         return (
           <PageComponent
             key={`page-${i + 1}`}
+            pageId={`page-${i + 1}`}
+            nextId={`page-${i + 2}`}
             startColor={color1}
             endColor={color2}
           />

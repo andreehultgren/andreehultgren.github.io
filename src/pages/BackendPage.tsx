@@ -3,27 +3,27 @@ import { CenteredColumn } from "../components/Flex";
 import { Row } from "../components/Flex";
 import PythonIcon from "../icons/PythonIcon";
 import RustIcon from "../icons/RustIcon";
-import { Page } from "../components/Page";
+import { GradientPage } from "src/components";
 
 type Props = {
   startColor: string;
   endColor: string;
+  pageId?: string;
+  nextId?: string;
 };
 
-export default function BackendPage({ startColor, endColor }: Props) {
+export default function BackendPage({
+  startColor,
+  endColor,
+  pageId,
+  nextId,
+}: Props) {
   return (
-    <Page
-      id="frontend"
-      style={{
-        background: `linear-gradient(180deg, ${startColor} 0%, ${endColor} 100%)`,
-      }}
-      onClick={() => {
-        document.getElementById("database")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "start",
-        });
-      }}
+    <GradientPage
+      startColor={startColor}
+      endColor={endColor}
+      pageId={pageId}
+      nextId={nextId}
     >
       <CenteredColumn style={{ height: "100%" }}>
         <LandingText>Backend Development</LandingText>
@@ -38,6 +38,6 @@ export default function BackendPage({ startColor, endColor }: Props) {
           </CenteredColumn>
         </Row>
       </CenteredColumn>
-    </Page>
+    </GradientPage>
   );
 }

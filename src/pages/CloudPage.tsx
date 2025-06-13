@@ -1,22 +1,28 @@
-import React from "react";
 import { LandingText } from "../components/Text";
 import { CenteredColumn } from "../components/Flex";
 import { Row } from "../components/Flex";
 import AWSIcon from "../icons/AWSIcon";
-import { Page } from "../components/Page";
+import { GradientPage } from "src/components";
 
 type Props = {
   startColor: string;
   endColor: string;
+  pageId?: string;
+  nextId?: string;
 };
 
-export default function CloudPage({ startColor, endColor }: Props) {
+export default function CloudPage({
+  startColor,
+  endColor,
+  pageId,
+  nextId,
+}: Props) {
   return (
-    <Page
-      id="frontend"
-      style={{
-        background: `linear-gradient(180deg, ${startColor} 0%, ${endColor} 100%)`,
-      }}
+    <GradientPage
+      startColor={startColor}
+      endColor={endColor}
+      pageId={pageId}
+      nextId={nextId}
     >
       <CenteredColumn style={{ height: "100%" }}>
         <LandingText>Cloud System</LandingText>
@@ -26,6 +32,6 @@ export default function CloudPage({ startColor, endColor }: Props) {
           </CenteredColumn>
         </Row>
       </CenteredColumn>
-    </Page>
+    </GradientPage>
   );
 }

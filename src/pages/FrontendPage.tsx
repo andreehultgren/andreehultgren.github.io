@@ -1,30 +1,30 @@
 import { LandingText, LandingTextSmall } from "../components/Text";
 import { CenteredColumn } from "../components/Flex";
-import { Page } from "../components/Page";
 
 import { Row } from "../components/Flex";
 import ReactIcon from "../icons/ReactIcon";
 import FlutterIcon from "../icons/FlutterIcon";
+import { GradientPage } from "src/components";
 
 type Props = {
   startColor: string;
   endColor: string;
+  pageId?: string;
+  nextId?: string;
 };
 
-export default function FrontendPage({ startColor, endColor }: Props) {
+export default function FrontendPage({
+  startColor,
+  endColor,
+  pageId,
+  nextId,
+}: Props) {
   return (
-    <Page
-      id="frontend"
-      style={{
-        background: `linear-gradient(180deg, ${startColor} 0%, ${endColor} 100%)`,
-      }}
-      onClick={() => {
-        document.getElementById("backend")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "start",
-        });
-      }}
+    <GradientPage
+      startColor={startColor}
+      endColor={endColor}
+      pageId={pageId}
+      nextId={nextId}
     >
       <CenteredColumn style={{ height: "100%", gap: 40 }}>
         <LandingText>Frontend Development</LandingText>
@@ -39,6 +39,6 @@ export default function FrontendPage({ startColor, endColor }: Props) {
           </CenteredColumn>
         </Row>
       </CenteredColumn>
-    </Page>
+    </GradientPage>
   );
 }
