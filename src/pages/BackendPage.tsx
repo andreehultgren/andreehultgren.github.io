@@ -1,8 +1,7 @@
 import { LandingText, LandingTextSmall } from "../components/Text";
 import { CenteredColumn } from "../components/Flex";
 import { Row } from "../components/Flex";
-import PythonIcon from "../icons/PythonIcon";
-import RustIcon from "../icons/RustIcon";
+import { PythonIcon, RustIcon } from "src/icons";
 import { GradientPage } from "src/components";
 
 type Props = {

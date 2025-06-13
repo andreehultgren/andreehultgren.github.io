@@ -2,8 +2,7 @@ import { LandingText, LandingTextSmall } from "../components/Text";
 import { CenteredColumn } from "../components/Flex";
 
 import { Row } from "../components/Flex";
-import ReactIcon from "../icons/ReactIcon";
-import FlutterIcon from "../icons/FlutterIcon";
+import { FlutterIcon, ReactIcon } from "src/icons";
 import { GradientPage } from "src/components";
 
 type Props = {

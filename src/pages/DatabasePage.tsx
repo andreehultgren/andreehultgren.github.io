@@ -1,8 +1,7 @@
 import { LandingText, LandingTextSmall } from "../components/Text";
 import { CenteredColumn } from "../components/Flex";
 import { Row } from "../components/Flex";
-import PostgresIcon from "../icons/PostgresIcon";
-import MongoDBIcon from "../icons/MongoDBIcon";
+import { MongoDBIcon, PostgresIcon } from "src/icons";
 import { GradientPage } from "src/components";
 
 type Props = {

@@ -1,7 +1,7 @@
 import { LandingText } from "../components/Text";
 import { CenteredColumn } from "../components/Flex";
 import { Row } from "../components/Flex";
-import AWSIcon from "../icons/AWSIcon";
+import { AWSIcon } from "src/icons";
 import { GradientPage } from "src/components";
 
 type Props = {
