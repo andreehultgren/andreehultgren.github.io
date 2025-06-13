@@ -1,10 +1,9 @@
 import React from "react";
 
-type Props = {};
-
-export default function RustIcon({}: Props) {
+export default function RustIcon() {
   return (
     <svg height="100px" width="100px" viewBox="0 0 106 106">
+      <title>Rust Icon</title>
       <g id="logo" transform="translate(53, 53)">
         <path
           id="r"

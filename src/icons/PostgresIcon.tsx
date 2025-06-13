@@ -1,8 +1,6 @@
 import React from "react";
 
-type Props = {};
-
-export default function PostgresIcon({}: Props) {
+export default function PostgresIcon() {
   return (
     <svg
       width="100px"
@@ -11,13 +9,14 @@ export default function PostgresIcon({}: Props) {
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>Postgres Icon</title>
       <g
         id="orginal"
         stroke="#000000"
         fillRule="nonzero"
         clipRule="nonzero"
         strokeMiterlimit="4"
-      ></g>
+      />
       <g
         id="Layer_x0020_3"
         fillRule="nonzero"

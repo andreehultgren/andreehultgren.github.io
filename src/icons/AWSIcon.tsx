@@ -1,8 +1,6 @@
 import React from "react";
 
-type Props = {};
-
-export default function AWSIcon({}: Props) {
+export default function AWSIcon() {
   return (
     <svg
       version="1.1"
@@ -17,6 +15,7 @@ export default function AWSIcon({}: Props) {
       width="200px"
       height="100px"
     >
+      <title>AWS Icon</title>
       <g>
         <path
           fill="#FFFFFF"

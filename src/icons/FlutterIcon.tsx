@@ -1,10 +1,9 @@
 import React from "react";
 
-type Props = {};
-
-export default function FlutterIcon({}: Props) {
+export default function FlutterIcon() {
   return (
     <svg width="100px" height="100px" viewBox="0 0 44 44" fill="none">
+      <title>Flutter Icon</title>
       <rect x="9.89282" y="18.0063" width="31.3277" height="24.4208" />
       <path
         d="M37.0631 20.0376H23.7056L12.0195 31.7265L18.6969 38.4038L37.0631 20.0376Z"
