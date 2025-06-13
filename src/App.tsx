@@ -1,22 +1,24 @@
 import {
-  CloudPage,
   LandingPage,
-  ProfilePage,
-  SkillsPage,
-  FrontendPage,
-  BackendPage,
-  DatabasePage,
+  MoreComingSoonPage,
+  // CloudPage,
+  // ProfilePage,
+  // SkillsPage,
+  // FrontendPage,
+  // BackendPage,
+  // DatabasePage,
 } from "src/pages";
 import { interpolateColor } from "src/utils/interpolateColor";
 
 const pages = [
   LandingPage,
-  ProfilePage,
-  SkillsPage,
-  FrontendPage,
-  BackendPage,
-  DatabasePage,
-  CloudPage,
+  MoreComingSoonPage,
+  // ProfilePage,
+  // SkillsPage,
+  // FrontendPage,
+  // BackendPage,
+  // DatabasePage,
+  // CloudPage,
 ];
 
 const startColor = "#203040";
