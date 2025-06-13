@@ -1,8 +1,6 @@
-import { LandingText, LandingTextSmall } from "../components/Text";
-import { CenteredColumn } from "../components/Flex";
-import { Row } from "../components/Flex";
+import { LandingText } from "../components/Text";
 import { MongoDBIcon, PostgresIcon } from "src/icons";
-import { GradientPage } from "src/components";
+import { GradientPage, IconsRow, Stack } from "src/components";
 
 type Props = {
   startColor: string;
@@ -17,6 +15,10 @@ export default function DatabasePage({
   pageId,
   nextId,
 }: Props) {
+  const icons = [
+    { Icon: MongoDBIcon, label: "MongoDB" },
+    { Icon: PostgresIcon, label: "PostgreSQL" },
+  ];
   return (
     <GradientPage
       startColor={startColor}
@@ -24,19 +26,15 @@ export default function DatabasePage({
       pageId={pageId}
       nextId={nextId}
     >
-      <CenteredColumn style={{ height: "100%" }}>
+      <Stack
+        spacing={6}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <LandingText>Databases</LandingText>
-        <Row style={{ gap: 80 }}>
-          <CenteredColumn>
-            <PostgresIcon />
-            <LandingTextSmall>PostgreSQL</LandingTextSmall>
-          </CenteredColumn>
-          <CenteredColumn>
-            <MongoDBIcon />
-            <LandingTextSmall>MongoDB</LandingTextSmall>
-          </CenteredColumn>
-        </Row>
-      </CenteredColumn>
+        <IconsRow icons={icons} />
+      </Stack>
     </GradientPage>
   );
 }

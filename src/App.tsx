@@ -20,7 +20,7 @@ const pages = [
 ];
 
 const startColor = "#203040";
-const endColor = "#2065B0";
+const endColor = "#4e300f";
 
 function App() {
   return (

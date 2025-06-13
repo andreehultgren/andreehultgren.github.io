@@ -1,9 +1,6 @@
-import { LandingText, LandingTextSmall } from "../components/Text";
-import { CenteredColumn } from "../components/Flex";
-
-import { Row } from "../components/Flex";
+import { LandingText } from "../components/Text";
 import { FlutterIcon, ReactIcon } from "src/icons";
-import { GradientPage } from "src/components";
+import { GradientPage, IconsRow, Stack } from "src/components";
 
 type Props = {
   startColor: string;
@@ -18,6 +15,10 @@ export default function FrontendPage({
   pageId,
   nextId,
 }: Props) {
+  const icons = [
+    { Icon: ReactIcon, label: "React" },
+    { Icon: FlutterIcon, label: "Flutter" },
+  ];
   return (
     <GradientPage
       startColor={startColor}
@@ -25,19 +26,15 @@ export default function FrontendPage({
       pageId={pageId}
       nextId={nextId}
     >
-      <CenteredColumn style={{ height: "100%", gap: 40 }}>
+      <Stack
+        spacing={6}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <LandingText>Frontend Development</LandingText>
-        <Row style={{ gap: 80 }}>
-          <CenteredColumn>
-            <ReactIcon />
-            <LandingTextSmall>React</LandingTextSmall>
-          </CenteredColumn>
-          <CenteredColumn>
-            <FlutterIcon />
-            <LandingTextSmall>Flutter</LandingTextSmall>
-          </CenteredColumn>
-        </Row>
-      </CenteredColumn>
+        <IconsRow icons={icons} />
+      </Stack>
     </GradientPage>
   );
 }

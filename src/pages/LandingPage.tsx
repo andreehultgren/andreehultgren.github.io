@@ -1,7 +1,7 @@
 import { LandingText } from "src/components/Text";
-import { CenteredColumn } from "../components/Flex";
-import Colored from "../components/Colored";
-import { GradientPage } from "src/components";
+import { GradientPage, Stack } from "src/components";
+
+import styled from "styled-components";
 
 type Props = {
   startColor: string;
@@ -9,6 +9,13 @@ type Props = {
   pageId?: string;
   nextId?: string;
 };
+
+const Colored = styled.code`
+  color: #03d5e0;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: center;
+`;
 
 export default function LandingPage({
   startColor,
@@ -23,16 +30,20 @@ export default function LandingPage({
       pageId={pageId}
       nextId={nextId}
     >
-      <CenteredColumn style={{ height: "100%" }}>
+      <Stack
+        spacing={1}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <LandingText>Andree Hultgren</LandingText>
-
         <LandingText>
           <Colored>{"<"}</Colored>
           Full stack developer
           <Colored>{"/>"}</Colored>
         </LandingText>
         <p style={{ color: "white" }}>{"(Click or scroll to navigate)"}</p>
-      </CenteredColumn>
+      </Stack>
     </GradientPage>
   );
 }

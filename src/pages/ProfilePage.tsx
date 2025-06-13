@@ -1,6 +1,5 @@
 import { LandingText, LandingTextSmall } from "../components/Text";
-import { CenteredColumn } from "../components/Flex";
-import { GradientPage } from "src/components";
+import { GradientPage, Stack } from "src/components";
 
 type Props = {
   startColor: string;
@@ -22,13 +21,18 @@ export default function ProfilePage({
       pageId={pageId}
       nextId={nextId}
     >
-      <CenteredColumn style={{ height: "100%" }}>
+      <Stack
+        spacing={1}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <LandingText>What is this?</LandingText>
         <LandingTextSmall>
           I want to show you my skills, <br /> I do that best by showing some
           cool features
         </LandingTextSmall>
-      </CenteredColumn>
+      </Stack>
     </GradientPage>
   );
 }

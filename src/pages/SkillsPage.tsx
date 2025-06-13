@@ -1,6 +1,5 @@
 import { LandingText, LandingTextSmall } from "src/components/Text";
-import { CenteredColumn } from "src/components/Flex";
-import { GradientPage } from "src/components";
+import { GradientPage, Stack } from "src/components";
 
 type Props = {
   startColor: string;
@@ -22,13 +21,18 @@ export default function SkillsPage({
       pageId={pageId}
       nextId={nextId}
     >
-      <CenteredColumn style={{ height: "100%" }}>
+      <Stack
+        spacing={1}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <LandingText>What are my skills?</LandingText>
         <LandingTextSmall>
           What do I know? <br />
           What am I capable of? <br />
         </LandingTextSmall>
-      </CenteredColumn>
+      </Stack>
     </GradientPage>
   );
 }

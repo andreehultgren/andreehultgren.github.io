@@ -1,8 +1,6 @@
 import { LandingText } from "../components/Text";
-import { CenteredColumn } from "../components/Flex";
-import { Row } from "../components/Flex";
 import { AWSIcon } from "src/icons";
-import { GradientPage } from "src/components";
+import { GradientPage, IconsRow, Stack } from "src/components";
 
 type Props = {
   startColor: string;
@@ -17,6 +15,7 @@ export default function CloudPage({
   pageId,
   nextId,
 }: Props) {
+  const icons = [{ Icon: AWSIcon, label: "AWS" }];
   return (
     <GradientPage
       startColor={startColor}
@@ -24,14 +23,15 @@ export default function CloudPage({
       pageId={pageId}
       nextId={nextId}
     >
-      <CenteredColumn style={{ height: "100%" }}>
+      <Stack
+        spacing={6}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <LandingText>Cloud System</LandingText>
-        <Row style={{ gap: 80 }}>
-          <CenteredColumn>
-            <AWSIcon />
-          </CenteredColumn>
-        </Row>
-      </CenteredColumn>
+        <IconsRow icons={icons} />
+      </Stack>
     </GradientPage>
   );
 }

@@ -1,22 +1,25 @@
-import { LandingText, LandingTextSmall } from "../components/Text";
-import { CenteredColumn } from "../components/Flex";
-import { Row } from "../components/Flex";
-import { PythonIcon, RustIcon } from "src/icons";
-import { GradientPage } from "src/components";
+import { lazy } from "react";
+import { LandingText } from "../components/Text";
+import { GradientPage, Stack, IconsRow } from "src/components";
 
-type Props = {
-  startColor: string;
-  endColor: string;
-  pageId?: string;
-  nextId?: string;
-};
+const PythonIcon = lazy(() => import("src/icons/PythonIcon"));
+const RustIcon = lazy(() => import("src/icons/RustIcon"));
 
 export default function BackendPage({
   startColor,
   endColor,
   pageId,
   nextId,
-}: Props) {
+}: {
+  startColor: string;
+  endColor: string;
+  pageId?: string;
+  nextId?: string;
+}) {
+  const icons = [
+    { Icon: PythonIcon, label: "Python" },
+    { Icon: RustIcon, label: "Rust" },
+  ];
   return (
     <GradientPage
       startColor={startColor}
@@ -24,19 +27,15 @@ export default function BackendPage({
       pageId={pageId}
       nextId={nextId}
     >
-      <CenteredColumn style={{ height: "100%" }}>
+      <Stack
+        spacing={6}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <LandingText>Backend Development</LandingText>
-        <Row style={{ gap: 80 }}>
-          <CenteredColumn>
-            <PythonIcon />
-            <LandingTextSmall>Python</LandingTextSmall>
-          </CenteredColumn>
-          <CenteredColumn>
-            <RustIcon />
-            <LandingTextSmall>Rust</LandingTextSmall>
-          </CenteredColumn>
-        </Row>
-      </CenteredColumn>
+        <IconsRow icons={icons} />
+      </Stack>
     </GradientPage>
   );
 }
