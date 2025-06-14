@@ -7,8 +7,8 @@ import {
   // FrontendPage,
   // BackendPage,
   // DatabasePage,
-} from "src/pages";
-import { interpolateColor } from "src/utils/interpolateColor";
+} from "./pages";
+import { interpolateColor } from "./utils/interpolateColor";
 
 const pages = [
   LandingPage,

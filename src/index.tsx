@@ -1,17 +1,11 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
-
-const App = React.lazy(() => import("./App"));
+import App from "./App";
 
 const anchor = document.getElementById("root");
 
 if (anchor) {
-  const root = createRoot(anchor);
-  root.render(
-    <Suspense>
-      <App />
-    </Suspense>
-  );
+  createRoot(anchor).render(<App />);
 } else {
   console.error("Failed to load app");
 }

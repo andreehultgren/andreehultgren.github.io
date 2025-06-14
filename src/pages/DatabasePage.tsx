@@ -1,6 +1,6 @@
 import { LandingText } from "../components/Text";
-import { MongoDBIcon, PostgresIcon } from "src/icons";
-import { GradientPage, IconsRow, Stack } from "src/components";
+import { MongoDBIcon, PostgresIcon } from "../icons";
+import { GradientPage, IconsRow, Stack } from "../components";
 
 type Props = {
   startColor: string;

@@ -1,5 +1,5 @@
-import { LandingText, LandingTextSmall } from "src/components/Text";
-import { GradientPage, Stack } from "src/components";
+import { LandingText, LandingTextSmall } from "../components/Text";
+import { GradientPage, Stack } from "../components";
 
 type Props = {
   startColor: string;

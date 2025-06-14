@@ -1,9 +1,9 @@
 import { lazy } from "react";
 import { LandingText } from "../components/Text";
-import { GradientPage, Stack, IconsRow } from "src/components";
+import { GradientPage, Stack, IconsRow } from "../components";
 
-const PythonIcon = lazy(() => import("src/icons/PythonIcon"));
-const RustIcon = lazy(() => import("src/icons/RustIcon"));
+const PythonIcon = lazy(() => import("../icons/PythonIcon"));
+const RustIcon = lazy(() => import("../icons/RustIcon"));
 
 export default function BackendPage({
   startColor,

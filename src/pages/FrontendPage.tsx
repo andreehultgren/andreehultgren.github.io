@@ -1,6 +1,6 @@
 import { LandingText } from "../components/Text";
-import { FlutterIcon, ReactIcon } from "src/icons";
-import { GradientPage, IconsRow, Stack } from "src/components";
+import { FlutterIcon, ReactIcon } from "../icons";
+import { GradientPage, IconsRow, Stack } from "../components";
 
 type Props = {
   startColor: string;

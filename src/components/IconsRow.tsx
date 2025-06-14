@@ -1,6 +1,6 @@
 import { Suspense, type ComponentType } from "react";
-import { LoadingSpinner, Stack } from "src/components";
-import { LandingTextSmall } from "src/components/Text";
+import { LoadingSpinner, Stack } from "../components";
+import { LandingTextSmall } from "../components/Text";
 
 type Props = {
   icons: { Icon: ComponentType; label: string }[];

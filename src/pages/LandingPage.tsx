@@ -1,5 +1,5 @@
-import { LandingText } from "src/components/Text";
-import { GradientPage, Stack } from "src/components";
+import { LandingText } from "../components/Text";
+import { GradientPage, Stack } from "../components";
 
 import styled from "styled-components";
 
