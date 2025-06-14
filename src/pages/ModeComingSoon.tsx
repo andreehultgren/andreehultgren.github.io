@@ -27,7 +27,7 @@ export default function LandingPage({
         justifyContent="center"
         style={{ minHeight: "100vh" }}
       >
-        <LandingText>More coming soon</LandingText>
+        <LandingText>More coming soon!</LandingText>
       </Stack>
     </GradientPage>
   );
