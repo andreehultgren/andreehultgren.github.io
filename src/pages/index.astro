@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import { SITE_TAGLINE } from "../consts";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout>
+  <section class="intro">
+    <h1>Andree Hultgren</h1>
+    <p class="role">{SITE_TAGLINE}</p>
+  </section>
+
+  <section class="posts">
+    <h2>Latest posts</h2>
+    {
+      posts.length === 0 ? (
+        <p>No posts yet.</p>
+      ) : (
+        <ul>
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              <span class="date">
+                <FormattedDate date={post.data.pubDate} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .intro h1 {
+    margin-bottom: 0.25rem;
+  }
+  .role {
+    color: #666;
+    margin-top: 0;
+  }
+  .posts ul {
+    list-style: none;
+    padding: 0;
+  }
+  .posts li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+  }
+  .date {
+    color: #888;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+</style>

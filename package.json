@@ -1,38 +1,19 @@
 {
-  "name": "cvpage",
-  "version": "0.1.1",
-  "homepage": "http://andreehultgren.github.io",
+  "name": "andreehultgren-blog",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "styled-components": "^5.3.9"
-  },
+  "type": "module",
+  "homepage": "https://hultan.com",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@types/react-dom": "^18.0.11",
-    "@types/styled-components": "^5.1.26",
-    "@vitejs/plugin-react": "^4.5.2",
-    "gh-pages": "^5.0.0",
-    "typescript": "^4.9.5",
-    "vite": "^6.3.5",
-    "webpack-bundle-analyzer": "^4.8.0"
+  "dependencies": {
+    "astro": "^5.0.0",
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0"
   }
 }

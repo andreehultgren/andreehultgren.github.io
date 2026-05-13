@@ -1,0 +1,43 @@
+---
+import { SITE_TITLE } from "../consts";
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<header>
+  <nav>
+    <a href="/" class="brand">{SITE_TITLE}</a>
+    <a href="/blog" aria-current={isActive("/blog") ? "page" : undefined}
+      >Blog</a
+    >
+    <a href="/about" aria-current={isActive("/about") ? "page" : undefined}
+      >About</a
+    >
+  </nav>
+</header>
+
+<style>
+  header {
+    border-bottom: 1px solid #eaeaea;
+  }
+  nav {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: baseline;
+  }
+  .brand {
+    font-weight: 600;
+    margin-right: auto;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a[aria-current="page"] {
+    text-decoration: underline;
+  }
+</style>

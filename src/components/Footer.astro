@@ -1,0 +1,22 @@
+---
+import { SITE_AUTHOR } from "../consts";
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <p>© {year} {SITE_AUTHOR}</p>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid #eaeaea;
+    margin-top: 3rem;
+  }
+  footer p {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+</style>
