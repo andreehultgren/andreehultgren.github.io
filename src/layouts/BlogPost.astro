@@ -65,21 +65,22 @@ const showReadTime = readMinutes >= 2;
           )
         }
       </p>
-      {
-        tags.length > 0 && (
-          <p class="tags">
-            {tags.map((t) => (
-              <span class="tag">{t}</span>
-            ))}
-          </p>
-        )
-      }
       {heroImage && <img src={heroImage} alt="" class="hero" />}
     </header>
 
     <div class={`prose${dropCap ? " has-dropcap" : ""}`}>
       <slot />
     </div>
+
+    {
+      tags.length > 0 && (
+        <p class="tags" aria-label="Tags">
+          {tags.map((t) => (
+            <span class="tag">#{t}</span>
+          ))}
+        </p>
+      )
+    }
 
     <p class="end-mark" aria-hidden="true">❡</p>
 
@@ -109,10 +110,6 @@ const showReadTime = readMinutes >= 2;
 </BaseLayout>
 
 <style>
-  article > * + * {
-    margin-top: 0;
-  }
-
   .back {
     font-size: var(--text-sm);
     margin: 0 0 var(--space-8);
@@ -157,17 +154,17 @@ const showReadTime = readMinutes >= 2;
   }
 
   .tags {
-    margin: var(--space-3) 0 0;
+    margin: var(--space-8) 0 0;
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--fg-muted);
   }
 
   .tag {
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--fg-muted);
+    /* Lowercase mono with # — clearly differentiated from uppercase eyebrows. */
   }
 
   .hero {
@@ -177,7 +174,7 @@ const showReadTime = readMinutes >= 2;
   }
 
   .prose {
-    margin-top: var(--space-12);
+    margin-top: var(--space-8);
   }
 
   /* Lead paragraph — first <p> in the rendered Markdown. Slight scale lift. */
@@ -246,7 +243,7 @@ const showReadTime = readMinutes >= 2;
   }
 
   .end-mark {
-    margin: var(--space-12) 0 0;
+    margin: var(--space-6) 0 0;
     text-align: center;
     color: var(--fg-muted);
     font-size: var(--text-lg);
@@ -254,7 +251,7 @@ const showReadTime = readMinutes >= 2;
   }
 
   .post-nav {
-    margin-top: var(--space-12);
+    margin-top: var(--space-16);
     padding-top: var(--space-6);
     border-top: 1px solid var(--border-subtle);
     display: grid;

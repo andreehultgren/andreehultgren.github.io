@@ -20,12 +20,20 @@ const { posts, numbered = true, startIndex = 1 } = Astro.props;
       return (
         <li>
           <a href={`/blog/${post.id}/`} class="row">
-            {numbered && <span class="num" aria-hidden="true">{n}</span>}
-            <FormattedDate date={post.data.pubDate} class="date" />
-            <span class="title">{post.data.title}</span>
-            {post.data.description && (
-              <span class="desc">{post.data.description}</span>
+            {numbered && (
+              <span class="num" aria-hidden="true">
+                {n}
+              </span>
             )}
+            <span class="body">
+              <span class="head">
+                <span class="title">{post.data.title}</span>
+                <FormattedDate date={post.data.pubDate} class="date" />
+              </span>
+              {post.data.description && (
+                <span class="desc">{post.data.description}</span>
+              )}
+            </span>
           </a>
         </li>
       );
@@ -55,9 +63,8 @@ const { posts, numbered = true, startIndex = 1 } = Astro.props;
 
   .row {
     display: grid;
-    grid-template-columns: 2.5ch 7ch 1fr;
+    grid-template-columns: 3ch 1fr;
     column-gap: var(--space-4);
-    row-gap: var(--space-1);
     padding: var(--space-4) 0;
     color: var(--fg);
     text-decoration: none;
@@ -73,22 +80,42 @@ const { posts, numbered = true, startIndex = 1 } = Astro.props;
     font-size: var(--text-xs);
     color: var(--fg-muted);
     font-variant-numeric: tabular-nums;
+    padding-top: 4px;
   }
 
-  .date {
-    color: var(--fg-muted);
-    font-size: var(--text-sm);
-    white-space: nowrap;
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-width: 0;
   }
 
   .title {
     font-weight: 500;
     font-size: var(--text-base);
     transition: color 120ms ease-out;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .date {
+    color: var(--fg-muted);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .desc {
-    grid-column: 3 / -1;
     color: var(--fg-secondary);
     font-size: var(--text-sm);
     overflow: hidden;
@@ -97,17 +124,19 @@ const { posts, numbered = true, startIndex = 1 } = Astro.props;
   }
 
   @media (max-width: 540px) {
-    .row {
-      grid-template-columns: 2.5ch 1fr;
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-1);
+    }
+
+    .title {
+      white-space: normal;
+      order: 2;
     }
 
     .date {
-      grid-column: 2 / -1;
-      order: -1;
-    }
-
-    .desc {
-      grid-column: 2 / -1;
+      order: 1;
     }
   }
 </style>

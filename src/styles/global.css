@@ -280,14 +280,37 @@ pre code {
   font-size: inherit;
 }
 
-/* Two-theme Shiki: swap on data-theme. */
+/* Two-theme Shiki with `defaultColor: false`. Both themes emitted as CSS
+ * variables; we explicitly pick which per active theme.
+ * Default (no data-theme) → dark, matching the site default. */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+  font-style: var(--shiki-dark-font-style);
+  font-weight: var(--shiki-dark-font-weight);
+  text-decoration: var(--shiki-dark-text-decoration);
+}
+
 [data-theme="light"] .astro-code,
 [data-theme="light"] .astro-code span {
-  color: var(--shiki-light) !important;
-  background-color: var(--shiki-light-bg) !important;
-  font-style: var(--shiki-light-font-style) !important;
-  font-weight: var(--shiki-light-font-weight) !important;
-  text-decoration: var(--shiki-light-text-decoration) !important;
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+  font-style: var(--shiki-light-font-style);
+  font-weight: var(--shiki-light-font-weight);
+  text-decoration: var(--shiki-light-text-decoration);
+}
+
+/* No explicit override + system prefers light → use light theme. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .astro-code,
+  :root:not([data-theme]) .astro-code span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+    font-style: var(--shiki-light-font-style);
+    font-weight: var(--shiki-light-font-weight);
+    text-decoration: var(--shiki-light-text-decoration);
+  }
 }
 
 /* ----- Images ----- */

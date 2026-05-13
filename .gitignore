@@ -24,3 +24,8 @@ pnpm-debug.log*
 
 # local agent instructions (not for public repo)
 CLAUDE.md
+
+# playwright screenshot output + report
+.screenshots/
+test-results/
+playwright-report/

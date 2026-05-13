@@ -11,10 +11,13 @@ export default defineConfig({
     // Two Shiki themes; CSS variables drive which one is shown.
     // See design.md §6 "Code blocks".
     shikiConfig: {
+      // Both themes emitted as CSS vars (--shiki-dark, --shiki-light).
+      // No inline default color — global.css picks the variable per theme.
       themes: {
-        light: "min-light",
         dark: "vesper",
+        light: "min-light",
       },
+      defaultColor: false,
       wrap: false,
     },
   },
