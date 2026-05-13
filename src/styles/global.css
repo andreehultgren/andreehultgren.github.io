@@ -1,51 +1,342 @@
 /*
- * Minimal placeholder styles only.
- * Real design language to be defined in design.md (see TODO in repo root).
- * Keep this file boring on purpose — no gradients, no theme tokens yet.
+ * hultan.com — global styles.
+ * Source of truth: /design.md. Tokens, scale, and rules below mirror that
+ * document. If you're changing anything here, read design.md first.
  */
 
-* {
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+/* ----- 2. Color tokens (dark = default) ----- */
+
+:root,
+[data-theme="dark"] {
+  --bg: #0f0f10;
+  --bg-elevated: #17171a;
+  --surface: #1c1c20;
+  --border-subtle: #24242a;
+  --border: #2e2e34;
+  --fg: #e7e5e1;
+  --fg-secondary: #a8a59f;
+  --fg-muted: #6e6c66;
+  --accent: #8ca0b3;
+  --accent-hover: #a8bccd;
+  --selection-bg: #2a3441;
+
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #faf9f6;
+  --bg-elevated: #f3f1ec;
+  --surface: #ebe8e1;
+  --border-subtle: #e3dfd6;
+  --border: #d4cfc3;
+  --fg: #1a1a1c;
+  --fg-secondary: #5c5a55;
+  --fg-muted: #8a8780;
+  --accent: #3a5d80;
+  --accent-hover: #284363;
+  --selection-bg: #d4dfeb;
+
+  color-scheme: light;
+}
+
+/* Honor system preference only when user hasn't picked. The no-flash
+ * inline script in BaseHead applies an explicit data-theme when one is
+ * stored; otherwise :root falls back to dark per design §9. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: #faf9f6;
+    --bg-elevated: #f3f1ec;
+    --surface: #ebe8e1;
+    --border-subtle: #e3dfd6;
+    --border: #d4cfc3;
+    --fg: #1a1a1c;
+    --fg-secondary: #5c5a55;
+    --fg-muted: #8a8780;
+    --accent: #3a5d80;
+    --accent-hover: #284363;
+    --selection-bg: #d4dfeb;
+
+    color-scheme: light;
+  }
+}
+
+/* ----- 3. Typography tokens ----- */
+
+:root {
+  --font-sans:
+    "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:
+    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.333rem;
+  --text-xl: 1.6rem;
+  --text-2xl: 1.92rem;
+  --text-3xl: 2.3rem;
+
+  /* ----- 4. Spacing tokens ----- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Shared layout values. */
+  --measure: 65ch;
+  --list-width: 720px;
+  --page-pad: 1.5rem;
+}
+
+/* ----- Base ----- */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html,
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
-  line-height: 1.6;
-  color: #111;
-  background: #fff;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: var(--text-base);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--fg);
+}
+
+/* ----- Layout ----- */
 
 main {
-  max-width: 720px;
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: var(--list-width);
   margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: var(--space-12) var(--page-pad) var(--space-16);
 }
+
+main.prose-page {
+  max-width: calc(var(--measure) + var(--page-pad) * 2);
+}
+
+/* ----- Headings ----- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: var(--text-lg);
+  font-weight: 500;
+}
+
+/* ----- Body prose ----- */
+
+p,
+ul,
+ol,
+blockquote,
+figure,
+pre,
+table {
+  margin: 0;
+}
+
+p + p {
+  margin-top: var(--space-6);
+}
+
+/* Default flow rhythm — children of <main> stack on --space-8. */
+main > * + * {
+  margin-top: var(--space-8);
+}
+
+/* ----- Links ----- */
 
 a {
-  color: #0366d6;
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition:
+    color 120ms ease-out,
+    text-decoration-color 120ms ease-out,
+    text-decoration-thickness 120ms ease-out;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+a:hover {
+  color: var(--accent-hover);
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ----- Lists ----- */
+
+ul,
+ol {
+  padding-left: 1.25rem;
+}
+
+ul li + li,
+ol li + li {
+  margin-top: var(--space-2);
+}
+
+/* ----- Blockquote ----- */
+
+blockquote {
+  border-left: 2px solid var(--border);
+  padding-left: var(--space-4);
+  color: var(--fg-secondary);
+  font-style: normal;
+}
+
+/* ----- Horizontal rule ----- */
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-12) 0;
+}
+
+/* ----- Code ----- */
+
+code,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+:not(pre) > code {
+  color: var(--fg);
 }
 
 pre {
-  overflow-x: auto;
-  padding: 1rem;
-  border: 1px solid #eaeaea;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
   border-radius: 6px;
-}
-
-code {
-  font-size: 0.9em;
+  padding: var(--space-4);
+  overflow-x: auto;
+  font-size: var(--text-sm);
+  line-height: 1.55;
 }
 
 pre code {
   background: transparent;
+  font-size: inherit;
+}
+
+/* Two-theme Shiki: swap on data-theme. */
+[data-theme="light"] .astro-code,
+[data-theme="light"] .astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+/* ----- Images ----- */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----- Skip link (a11y §8) ----- */
+
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed;
+  left: var(--page-pad);
+  top: var(--page-pad);
+  width: auto;
+  height: auto;
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-elevated);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+/* ----- Reduced motion ----- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Numeric niceties — dates and line lengths */
+.tabular {
+  font-variant-numeric: tabular-nums;
 }

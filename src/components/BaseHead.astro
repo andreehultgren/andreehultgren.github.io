@@ -1,5 +1,6 @@
 ---
-// Per-page <head> — meta, OG, canonical, sitemap link.
+// Per-page <head> — meta, OG, canonical, sitemap link, no-flash theme.
+// See design.md §9.
 import { SITE_TITLE, SITE_DESCRIPTION, SITE_AUTHOR } from "../consts";
 
 interface Props {
@@ -21,6 +22,7 @@ const ogImage = new URL(image, Astro.site);
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark light" />
 <link rel="icon" type="image/png" href="/icon.png" />
 <link rel="manifest" href="/manifest.json" />
 <link rel="sitemap" href="/sitemap-index.xml" />
@@ -41,3 +43,19 @@ const ogImage = new URL(image, Astro.site);
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+
+<!-- No-flash theme: read localStorage before paint. Default = dark. -->
+<script is:inline>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      if (stored === "light" || stored === "dark") {
+        document.documentElement.setAttribute("data-theme", stored);
+      }
+      // If stored === "system" or unset: no attribute → CSS default (dark)
+      // with prefers-color-scheme override per global.css.
+    } catch (_) {
+      /* localStorage unavailable; fall through to CSS default. */
+    }
+  })();
+</script>

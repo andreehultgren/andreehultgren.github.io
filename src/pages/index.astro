@@ -15,19 +15,22 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
     <p class="role">{SITE_TAGLINE}</p>
   </section>
 
-  <section class="posts">
-    <h2>Latest posts</h2>
+  <section class="posts" aria-labelledby="latest-heading">
+    <h2 id="latest-heading">Latest</h2>
     {
       posts.length === 0 ? (
-        <p>No posts yet.</p>
+        <p class="empty">No posts yet.</p>
       ) : (
         <ul>
           {posts.map((post) => (
             <li>
-              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-              <span class="date">
-                <FormattedDate date={post.data.pubDate} />
-              </span>
+              <a href={`/blog/${post.id}/`} class="row">
+                <span class="title">{post.data.title}</span>
+                <FormattedDate date={post.data.pubDate} class="date" />
+                {post.data.description && (
+                  <span class="desc">{post.data.description}</span>
+                )}
+              </a>
             </li>
           ))}
         </ul>
@@ -38,26 +41,79 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 
 <style>
   .intro h1 {
-    margin-bottom: 0.25rem;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
   }
+
   .role {
-    color: #666;
-    margin-top: 0;
+    color: var(--fg-secondary);
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-md);
   }
+
+  .posts h2 {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    margin: 0 0 var(--space-4);
+  }
+
   .posts ul {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
+
   .posts li {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
+    margin: 0;
+    border-bottom: 1px solid var(--border-subtle);
   }
+
+  .posts li + li {
+    margin-top: 0;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    padding: var(--space-4) 0;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .row:hover .title {
+    color: var(--accent);
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: var(--text-base);
+    transition: color 120ms ease-out;
+  }
+
   .date {
-    color: #888;
-    font-size: 0.85rem;
+    color: var(--fg-muted);
+    font-size: var(--text-sm);
     white-space: nowrap;
+    align-self: baseline;
+  }
+
+  .desc {
+    grid-column: 1 / -1;
+    color: var(--fg-secondary);
+    font-size: var(--text-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .empty {
+    color: var(--fg-muted);
   }
 </style>

@@ -8,9 +8,14 @@ export default defineConfig({
   site: "https://hultan.com",
   integrations: [mdx(), sitemap()],
   markdown: {
+    // Two Shiki themes; CSS variables drive which one is shown.
+    // See design.md §6 "Code blocks".
     shikiConfig: {
-      theme: "github-dark-dimmed",
-      wrap: true,
+      themes: {
+        light: "min-light",
+        dark: "vesper",
+      },
+      wrap: false,
     },
   },
 });

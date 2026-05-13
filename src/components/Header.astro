@@ -1,43 +1,70 @@
 ---
 import { SITE_TITLE } from "../consts";
+import ThemeToggle from "./ThemeToggle.astro";
+
 const pathname = Astro.url.pathname;
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
 <header>
-  <nav>
-    <a href="/" class="brand">{SITE_TITLE}</a>
-    <a href="/blog" aria-current={isActive("/blog") ? "page" : undefined}
-      >Blog</a
-    >
-    <a href="/about" aria-current={isActive("/about") ? "page" : undefined}
-      >About</a
-    >
+  <nav aria-label="Primary">
+    <a href="/" class="brand" aria-current={isActive("/") ? "page" : undefined}>
+      {SITE_TITLE}
+    </a>
+    <div class="links">
+      <a href="/blog" aria-current={isActive("/blog") ? "page" : undefined}>
+        Blog
+      </a>
+      <a href="/about" aria-current={isActive("/about") ? "page" : undefined}>
+        About
+      </a>
+    </div>
+    <ThemeToggle />
   </nav>
 </header>
 
 <style>
   header {
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid var(--border-subtle);
   }
+
   nav {
-    max-width: 720px;
+    max-width: var(--list-width);
     margin: 0 auto;
-    padding: 1rem 1.25rem;
+    padding: var(--space-4) var(--page-pad);
     display: flex;
-    gap: 1.25rem;
-    align-items: baseline;
+    gap: var(--space-6);
+    align-items: center;
+    min-height: 64px;
+    line-height: 1.4;
   }
-  .brand {
-    font-weight: 600;
-    margin-right: auto;
+
+  .links {
+    display: flex;
+    gap: var(--space-6);
+    margin-left: auto;
   }
-  a {
-    color: inherit;
+
+  nav a {
+    color: var(--fg);
     text-decoration: none;
+    font-weight: 500;
+    font-size: var(--text-base);
   }
-  a[aria-current="page"] {
+
+  nav a:hover {
+    color: var(--accent);
+  }
+
+  nav a[aria-current="page"] {
     text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .brand {
+    font-weight: 500;
   }
 </style>

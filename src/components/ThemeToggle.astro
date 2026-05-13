@@ -1,0 +1,90 @@
+---
+// Three-state theme toggle: system / dark / light.
+// Stored in localStorage under "theme". No-flash applied in BaseHead.
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="theme-toggle"
+  aria-label="Theme: system"
+  data-state="system"
+>
+  <span class="label" aria-hidden="true">SYS</span>
+</button>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    var label = btn.querySelector(".label");
+
+    function read() {
+      try {
+        var v = localStorage.getItem("theme");
+        return v === "light" || v === "dark" ? v : "system";
+      } catch (_) {
+        return "system";
+      }
+    }
+
+    function apply(state) {
+      if (state === "light" || state === "dark") {
+        document.documentElement.setAttribute("data-theme", state);
+        try {
+          localStorage.setItem("theme", state);
+        } catch (_) {}
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+        try {
+          localStorage.removeItem("theme");
+        } catch (_) {}
+      }
+      btn.dataset.state = state;
+      btn.setAttribute("aria-label", "Theme: " + state);
+      if (label) {
+        label.textContent =
+          state === "light" ? "LGT" : state === "dark" ? "DRK" : "SYS";
+      }
+    }
+
+    // Cycle: system → dark → light → system
+    var order = ["system", "dark", "light"];
+    btn.addEventListener("click", function () {
+      var current = read();
+      var next = order[(order.indexOf(current) + 1) % order.length];
+      apply(next);
+    });
+
+    apply(read());
+  })();
+</script>
+
+<style>
+  .theme-toggle {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--fg-secondary);
+    font: inherit;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.05em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition:
+      color 120ms ease-out,
+      border-color 120ms ease-out;
+  }
+
+  .theme-toggle:hover {
+    color: var(--accent);
+    border-color: var(--border);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 3px;
+  }
+</style>

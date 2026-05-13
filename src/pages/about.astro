@@ -5,14 +5,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout
   title="About"
   description="About Andree Hultgren — fullstack developer."
+  prose
 >
   <h1>About</h1>
-  <p>
-    Hi, I'm Andree. I'm a fullstack developer. This is where I write notes about
-    what I'm building and learning.
+  <p class="lead">
+    Hi, I'm Andree — a fullstack developer based in the Nordics. This site is
+    where I keep notes on what I'm building and learning.
   </p>
   <p>
-    Find me on
-    <a href="https://github.com/andreehultgren" rel="me">GitHub</a>.
+    I write about backend systems, frontend architecture, tooling, and the
+    occasional design opinion. Posts are short by default; if a topic deserves
+    length, it earns it.
+  </p>
+  <p>
+    Find me on <a href="https://github.com/andreehultgren" rel="me">GitHub</a>.
   </p>
 </BaseLayout>
+
+<style>
+  h1 {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-8);
+  }
+
+  .lead {
+    font-size: var(--text-md);
+    color: var(--fg);
+  }
+</style>

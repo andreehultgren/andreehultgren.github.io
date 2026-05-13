@@ -9,23 +9,46 @@ interface Props {
   updatedDate?: Date;
   tags?: string[];
   heroImage?: string;
+  /** Words in post body — used for reading time. */
+  wordCount?: number;
 }
 
-const { title, description, pubDate, updatedDate, tags = [], heroImage } =
-  Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  tags = [],
+  heroImage,
+  wordCount = 0,
+} = Astro.props;
+
+// Reading time per design §6: ~200 wpm, shown only if ≥2 min.
+const readMinutes = Math.max(1, Math.round(wordCount / 200));
+const showReadTime = readMinutes >= 2;
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}>
+<BaseLayout
+  title={title}
+  description={description}
+  image={heroImage}
+  prose
+>
   <article>
+    <p class="back">
+      <a href="/blog">← Blog</a>
+    </p>
+
     <header class="post-header">
       <h1>{title}</h1>
       <p class="meta">
-        <FormattedDate date={pubDate} />
+        <FormattedDate date={pubDate} variant="long" />
+        {showReadTime && <span> · {readMinutes} min read</span>}
         {
           updatedDate && (
-            <>
-              {" "}· updated <FormattedDate date={updatedDate} />
-            </>
+            <span>
+              {" "}· updated <FormattedDate date={updatedDate} variant="long" />
+            </span>
           )
         }
       </p>
@@ -33,47 +56,128 @@ const { title, description, pubDate, updatedDate, tags = [], heroImage } =
         tags.length > 0 && (
           <p class="tags">
             {tags.map((t) => (
-              <span class="tag">#{t}</span>
+              <span class="tag">{t}</span>
             ))}
           </p>
         )
       }
       {heroImage && <img src={heroImage} alt="" class="hero" />}
     </header>
+
     <div class="prose">
       <slot />
     </div>
-    <p class="back"><a href="/blog">← All posts</a></p>
   </article>
 </BaseLayout>
 
 <style>
-  .post-header h1 {
+  /* Override BaseLayout's default >*+* rhythm — this article controls its own. */
+  article > * + * {
     margin-top: 0;
   }
+
+  .back {
+    font-size: var(--text-sm);
+    margin: 0 0 var(--space-8);
+  }
+
+  .back a {
+    color: var(--fg-muted);
+    text-decoration: none;
+  }
+
+  .back a:hover {
+    color: var(--accent);
+  }
+
+  .post-header {
+    margin-top: var(--space-12);
+  }
+
+  .post-header h1 {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
   .meta {
-    color: #666;
-    font-size: 0.9rem;
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-sm);
+    color: var(--fg-muted);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
   }
+
   .tags {
-    margin: 0.25rem 0 1rem;
+    margin: var(--space-3) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
   }
+
   .tag {
-    font-size: 0.8rem;
-    margin-right: 0.5rem;
-    color: #444;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
   }
+
   .hero {
     width: 100%;
     border-radius: 6px;
-    margin: 1rem 0;
+    margin: var(--space-8) 0;
   }
+
+  .prose {
+    margin-top: var(--space-12);
+  }
+
+  /* Vertical rhythm inside the rendered Markdown. */
   .prose :global(p),
-  .prose :global(li) {
-    line-height: 1.7;
+  .prose :global(ul),
+  .prose :global(ol),
+  .prose :global(blockquote),
+  .prose :global(pre),
+  .prose :global(figure),
+  .prose :global(table) {
+    margin-top: 0;
+    margin-bottom: 0;
   }
-  .back {
-    margin-top: 2rem;
-    font-size: 0.9rem;
+
+  .prose :global(> * + *) {
+    margin-top: var(--space-6);
+  }
+
+  .prose :global(h2) {
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-xl);
+  }
+
+  .prose :global(h3) {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-2);
+    font-size: var(--text-lg);
+  }
+
+  .prose :global(img),
+  .prose :global(figure) {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-8);
+    border-radius: 6px;
+  }
+
+  .prose :global(figcaption) {
+    font-size: var(--text-sm);
+    color: var(--fg-muted);
+    text-align: center;
+    margin-top: var(--space-2);
+  }
+
+  .prose :global(hr) {
+    margin: var(--space-12) 0;
+    border: 0;
+    border-top: 1px solid var(--border-subtle);
   }
 </style>

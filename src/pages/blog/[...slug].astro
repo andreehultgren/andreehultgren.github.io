@@ -12,8 +12,15 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// Word count from raw body — strips code fences and inline backticks so the
+// estimate reflects prose, not snippets.
+const raw = (post.body ?? "")
+  .replace(/```[\s\S]*?```/g, " ")
+  .replace(/`[^`]*`/g, " ");
+const wordCount = raw.split(/\s+/).filter(Boolean).length;
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} wordCount={wordCount}>
   <Content />
 </BlogPost>

@@ -8,9 +8,11 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  /** Constrain main to prose measure (65ch). Used on post pages. */
+  prose?: boolean;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, prose = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,8 +21,9 @@ const { title, description, image } = Astro.props;
     <BaseHead title={title} description={description} image={image} />
   </head>
   <body>
+    <a href="#content" class="skip-link">Skip to content</a>
     <Header />
-    <main>
+    <main id="content" class={prose ? "prose-page" : undefined}>
       <slot />
     </main>
     <Footer />

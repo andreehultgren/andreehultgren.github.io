@@ -9,21 +9,25 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 ---
 
 <BaseLayout title="Blog" description="All posts.">
-  <h1>Blog</h1>
+  <header class="page-header">
+    <h1>Blog</h1>
+    <p class="sub">Notes, experiments, and writing.</p>
+  </header>
+
   {
     posts.length === 0 ? (
-      <p>No posts yet.</p>
+      <p class="empty">No posts yet.</p>
     ) : (
       <ul class="list">
         {posts.map((post) => (
           <li>
-            <a href={`/blog/${post.id}/`}>
-              <h2>{post.data.title}</h2>
+            <a href={`/blog/${post.id}/`} class="row">
+              <span class="title">{post.data.title}</span>
+              <FormattedDate date={post.data.pubDate} class="date" />
+              {post.data.description && (
+                <span class="desc">{post.data.description}</span>
+              )}
             </a>
-            <p class="meta">
-              <FormattedDate date={post.data.pubDate} />
-            </p>
-            <p>{post.data.description}</p>
           </li>
         ))}
       </ul>
@@ -32,21 +36,71 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 </BaseLayout>
 
 <style>
+  .page-header h1 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .sub {
+    color: var(--fg-secondary);
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-md);
+  }
+
   .list {
     list-style: none;
     padding: 0;
-  }
-  .list li {
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
-  }
-  .list h2 {
     margin: 0;
-    font-size: 1.25rem;
   }
-  .meta {
-    color: #888;
-    font-size: 0.85rem;
-    margin: 0.25rem 0;
+
+  .list li {
+    margin: 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .list li + li {
+    margin-top: 0;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    padding: var(--space-4) 0;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .row:hover .title {
+    color: var(--accent);
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: var(--text-md);
+    transition: color 120ms ease-out;
+  }
+
+  .date {
+    color: var(--fg-muted);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    align-self: baseline;
+  }
+
+  .desc {
+    grid-column: 1 / -1;
+    color: var(--fg-secondary);
+    font-size: var(--text-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .empty {
+    color: var(--fg-muted);
   }
 </style>
