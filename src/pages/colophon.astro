@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Colophon"
+  description="How hultan.com is built — type, palette, stack."
+  prose
+>
+  <p class="eyebrow">Colophon</p>
+  <h1>How this site is built.</h1>
+
+  <p class="lead">
+    Small site, opinionated stack. Restraint is the design principle and the
+    build philosophy.
+  </p>
+
+  <h2>Type</h2>
+  <p>
+    Set in <a href="https://rsms.me/inter/">Inter</a> (variable, single
+    weight axis) for prose and UI, with <a href="https://www.jetbrains.com/lp/mono/">JetBrains
+    Mono</a> for dates, code, and editorial labels. System fonts as
+    honest fallbacks.
+  </p>
+
+  <h2>Palette</h2>
+  <p>
+    Dark by default. Warm near-black background, birch off-white text, a
+    single fjord-blue accent. Light mode is a mirror, toggled per session.
+    All token pairs verified for WCAG AA contrast.
+  </p>
+
+  <h2>Stack</h2>
+  <ul>
+    <li><a href="https://astro.build/">Astro</a> for static generation.</li>
+    <li>Markdown + MDX for content; Shiki (Vesper / min-light) for code.</li>
+    <li>Plain CSS, custom-property tokens, no utility framework.</li>
+    <li>Hosted on GitHub Pages with the custom domain <code>hultan.com</code>.</li>
+  </ul>
+
+  <h2>Source of truth</h2>
+  <p>
+    The design language lives in <code>/design.md</code> in the repo. If the
+    code disagrees with the document, the document wins.
+  </p>
+
+  <h2>License</h2>
+  <p>
+    Site content © {new Date().getFullYear()} Andree Hultgren. Code is
+    available on <a href="https://github.com/andreehultgren/andreehultgren.github.io">GitHub</a>.
+  </p>
+</BaseLayout>
+
+<style>
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    margin: 0 0 var(--space-2);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-8);
+  }
+
+  .lead {
+    font-size: var(--text-md);
+    color: var(--fg);
+  }
+
+  h2 {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    margin: var(--space-12) 0 var(--space-4);
+  }
+</style>

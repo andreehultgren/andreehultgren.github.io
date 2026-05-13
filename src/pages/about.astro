@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Currently from "../components/Currently.astro";
+import SelectedWork from "../components/SelectedWork.astro";
+import { FOOTER_LINKS } from "../data/site";
 ---
 
 <BaseLayout
@@ -7,22 +10,50 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   description="About Andree Hultgren — fullstack developer."
   prose
 >
-  <h1>About</h1>
+  <p class="eyebrow">About</p>
+  <h1>Andree Hultgren.</h1>
+
   <p class="lead">
-    Hi, I'm Andree — a fullstack developer based in the Nordics. This site is
-    where I keep notes on what I'm building and learning.
+    Fullstack developer based in Sweden. I build web products end-to-end —
+    backend, frontend, and the design that holds them together. This site is
+    where I keep notes on the craft.
   </p>
+
   <p>
-    I write about backend systems, frontend architecture, tooling, and the
-    occasional design opinion. Posts are short by default; if a topic deserves
-    length, it earns it.
+    I write short by default. If a topic earns length, it gets length.
+    Most posts here are field notes from things I'm shipping at work or on
+    weekends.
   </p>
-  <p>
-    Find me on <a href="https://github.com/andreehultgren" rel="me">GitHub</a>.
-  </p>
+
+  <Currently />
+
+  <SelectedWork limit={5} />
+
+  <section class="contact" aria-labelledby="contact-heading">
+    <h2 id="contact-heading" class="eyebrow">Elsewhere</h2>
+    <ul>
+      {
+        FOOTER_LINKS.map((l) => (
+          <li>
+            <a href={l.href} rel="me">{l.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </BaseLayout>
 
 <style>
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    margin: 0 0 var(--space-2);
+  }
+
   h1 {
     font-size: var(--text-3xl);
     font-weight: 600;
@@ -33,5 +64,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .lead {
     font-size: var(--text-md);
     color: var(--fg);
+    margin: 0;
+  }
+
+  .contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .contact li {
+    margin: 0;
   }
 </style>

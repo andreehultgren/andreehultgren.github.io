@@ -1,0 +1,60 @@
+---
+import { CURRENTLY } from "../data/site";
+---
+
+<section class="currently" aria-labelledby="currently-heading">
+  <h2 id="currently-heading" class="eyebrow">Currently</h2>
+  <dl>
+    {
+      CURRENTLY.map((row) => (
+        <div class="row">
+          <dt>{row.term}</dt>
+          <dd>
+            {row.href ? <a href={row.href}>{row.value}</a> : row.value}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<style>
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    margin: 0 0 var(--space-4);
+  }
+
+  dl {
+    margin: 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    column-gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    align-self: baseline;
+    padding-top: 2px;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--fg);
+    font-size: var(--text-base);
+  }
+</style>

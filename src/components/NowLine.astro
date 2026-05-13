@@ -1,0 +1,43 @@
+---
+import { NOW } from "../data/site";
+---
+
+<p class="now">
+  <span class="label" aria-hidden="true">NOW</span>
+  <span class="text">{NOW.text}</span>
+  <span class="updated">Updated {NOW.updated}</span>
+</p>
+
+<style>
+  .now {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    align-items: baseline;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    align-self: start;
+    padding-top: 2px;
+  }
+
+  .text {
+    color: var(--fg);
+    font-size: var(--text-base);
+  }
+
+  .updated {
+    grid-column: 2;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+  }
+</style>

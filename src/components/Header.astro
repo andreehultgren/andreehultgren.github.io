@@ -5,12 +5,20 @@ import ThemeToggle from "./ThemeToggle.astro";
 const pathname = Astro.url.pathname;
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
+const isHome = pathname === "/";
 ---
 
 <header>
   <nav aria-label="Primary">
     <a href="/" class="brand" aria-current={isActive("/") ? "page" : undefined}>
-      {SITE_TITLE}
+      <span class="wordmark">{SITE_TITLE}</span>
+      {
+        isHome && (
+          <span class="sub" aria-hidden="true">
+            field notes · 2026
+          </span>
+        )
+      }
     </a>
     <div class="links">
       <a href="/blog" aria-current={isActive("/blog") ? "page" : undefined}>
@@ -57,7 +65,12 @@ const isActive = (href: string) =>
     color: var(--accent);
   }
 
-  nav a[aria-current="page"] {
+  nav a:hover .sub {
+    color: var(--fg-muted);
+  }
+
+  nav a[aria-current="page"] .wordmark,
+  .links a[aria-current="page"] {
     text-decoration: underline;
     text-decoration-color: var(--accent);
     text-decoration-thickness: 1px;
@@ -65,6 +78,21 @@ const isActive = (href: string) =>
   }
 
   .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.1;
+  }
+
+  .wordmark {
     font-weight: 500;
+  }
+
+  .sub {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
   }
 </style>

@@ -11,6 +11,10 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     heroImage: z.string().optional(),
+    /** Editorial section label rendered as eyebrow above the title. */
+    kind: z.enum(["NOTE", "ESSAY", "FIELD NOTE"]).default("NOTE"),
+    /** Render a drop cap on the first letter of the lead paragraph. */
+    dropCap: z.boolean().default(false),
   }),
 });
 

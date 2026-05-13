@@ -1,0 +1,113 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+  /** Show 01, 02 numbering in the left rail. */
+  numbered?: boolean;
+  /** Continue numbering from a given offset (per-year grouping uses this). */
+  startIndex?: number;
+}
+
+const { posts, numbered = true, startIndex = 1 } = Astro.props;
+---
+
+<ul class="post-list">
+  {
+    posts.map((post, i) => {
+      const n = String(startIndex + i).padStart(2, "0");
+      return (
+        <li>
+          <a href={`/blog/${post.id}/`} class="row">
+            {numbered && <span class="num" aria-hidden="true">{n}</span>}
+            <FormattedDate date={post.data.pubDate} class="date" />
+            <span class="title">{post.data.title}</span>
+            {post.data.description && (
+              <span class="desc">{post.data.description}</span>
+            )}
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-list li {
+    margin: 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .post-list li:first-child {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .post-list li + li {
+    margin-top: 0;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 2.5ch 7ch 1fr;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    padding: var(--space-4) 0;
+    color: var(--fg);
+    text-decoration: none;
+    align-items: baseline;
+  }
+
+  .row:hover .title {
+    color: var(--accent);
+  }
+
+  .num {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .date {
+    color: var(--fg-muted);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: var(--text-base);
+    transition: color 120ms ease-out;
+  }
+
+  .desc {
+    grid-column: 3 / -1;
+    color: var(--fg-secondary);
+    font-size: var(--text-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 540px) {
+    .row {
+      grid-template-columns: 2.5ch 1fr;
+    }
+
+    .date {
+      grid-column: 2 / -1;
+      order: -1;
+    }
+
+    .desc {
+      grid-column: 2 / -1;
+    }
+  }
+</style>

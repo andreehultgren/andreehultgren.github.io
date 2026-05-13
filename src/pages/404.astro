@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Not found" description="Page not found." prose>
+  <p class="eyebrow">404</p>
+  <h1>Off the map.</h1>
+  <p class="lead">
+    This page doesn't exist — or once did, and has since been retired.
+  </p>
+  <p>
+    Try the <a href="/">home page</a> or the
+    <a href="/blog">writing archive</a>.
+  </p>
+</BaseLayout>
+
+<style>
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    margin: 0 0 var(--space-2);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-8);
+  }
+
+  .lead {
+    font-size: var(--text-md);
+    color: var(--fg);
+  }
+</style>

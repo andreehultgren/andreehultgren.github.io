@@ -3,24 +3,39 @@ import { getCollection, render } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+  // Build a chronological list once and pass prev/next references per page.
+  const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  return posts.map((post, i) => {
+    const newer = posts[i - 1]; // chronologically newer
+    const older = posts[i + 1];
+    return {
+      params: { slug: post.id },
+      props: {
+        post,
+        prev: older
+          ? { title: older.data.title, href: `/blog/${older.id}/` }
+          : null,
+        next: newer
+          ? { title: newer.data.title, href: `/blog/${newer.id}/` }
+          : null,
+      },
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
 
-// Word count from raw body — strips code fences and inline backticks so the
-// estimate reflects prose, not snippets.
+// Word count from raw body — code stripped so the estimate is prose only.
 const raw = (post.body ?? "")
   .replace(/```[\s\S]*?```/g, " ")
   .replace(/`[^`]*`/g, " ");
 const wordCount = raw.split(/\s+/).filter(Boolean).length;
 ---
 
-<BlogPost {...post.data} wordCount={wordCount}>
+<BlogPost {...post.data} wordCount={wordCount} prev={prev} next={next}>
   <Content />
 </BlogPost>

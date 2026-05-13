@@ -1,10 +1,35 @@
 ---
 import { SITE_AUTHOR } from "../consts";
+import { FOOTER_LINKS } from "../data/site";
 const year = new Date().getFullYear();
 ---
 
 <footer>
-  <p>© {year} {SITE_AUTHOR}</p>
+  <div class="inner">
+    <div class="col">
+      <p class="line">© {year} {SITE_AUTHOR}</p>
+      <p class="line muted">Set in Inter &amp; JetBrains Mono.</p>
+    </div>
+    <div class="col">
+      <p class="line">
+        <a href="/colophon">Colophon</a>
+      </p>
+      <p class="line">
+        <a href="/sitemap-index.xml">Sitemap</a>
+      </p>
+    </div>
+    <div class="col right">
+      {
+        FOOTER_LINKS.map((l) => (
+          <p class="line">
+            <a href={l.href} rel="me">
+              {l.label}
+            </a>
+          </p>
+        ))
+      }
+    </div>
+  </div>
 </footer>
 
 <style>
@@ -13,11 +38,53 @@ const year = new Date().getFullYear();
     margin-top: var(--space-16);
   }
 
-  footer p {
+  .inner {
     max-width: var(--list-width);
     margin: 0 auto;
-    padding: var(--space-4) var(--page-pad);
+    padding: var(--space-6) var(--page-pad);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-6);
     font-size: var(--text-xs);
     color: var(--fg-muted);
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+  }
+
+  .col.right {
+    text-align: right;
+  }
+
+  .line {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .line.muted {
+    color: var(--fg-muted);
+  }
+
+  .line a {
+    color: var(--fg-secondary);
+    text-decoration: none;
+  }
+
+  .line a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 540px) {
+    .inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .col.right {
+      text-align: left;
+    }
   }
 </style>

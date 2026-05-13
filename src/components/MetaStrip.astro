@@ -1,0 +1,32 @@
+---
+import { META_STRIP } from "../data/site";
+---
+
+<p class="meta-strip" aria-label="Site metadata">
+  {
+    META_STRIP.map((item, i) => (
+      <>
+        {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+        <span>{item.label}</span>
+      </>
+    ))
+  }
+</p>
+
+<style>
+  .meta-strip {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .sep {
+    color: var(--border);
+  }
+</style>
