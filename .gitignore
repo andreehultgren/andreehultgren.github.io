@@ -21,3 +21,6 @@ pnpm-debug.log*
 
 # misc
 .DS_Store
+
+# local agent instructions (not for public repo)
+CLAUDE.md
